@@ -1,0 +1,16 @@
+div.page-header{
+    margin:0;
+    padding:0;
+}
+div.components{
+    height:400px;
+    border:1px solid #EEEEEE;
+}
+div.structure{
+    border:1px solid #EEEEEE;
+    height:400px;
+}
+div.result{
+    height:500px;
+    border:1px solid #EEEEEE;
+}

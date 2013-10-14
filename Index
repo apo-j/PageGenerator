@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/jquery-ui-1.10.0.custom.css">
+    <link rel="stylesheet" href="./css/site.css">
+</head>
+<body>
+<div class="page-header">
+    <h1>IPage Generator</h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-md-7 components">
+        Page :
+        <ul>
+            <li>LeftSideBar
+                <div class="btn-group" data-bind="foreach:options.sideBar">
+                    <button type="button" class="btn btn-default btn-xs" data-bind="click:$root.options.sideBarOptionClick">{{name}}</button>
+                </div>
+                <ul data-bind="foreach:page.leftSideBar.items">
+                    <li></li>
+                </ul>
+            </li>
+            <li>RightSideBar
+                <div class="btn-group" data-bind="foreach:options.sideBar">
+                    <button type="button" class="btn btn-default btn-xs" data-bind="click:$root.options.sideBarOptionClick">{{name}}</button>
+                </div>
+                <ul data-bind="foreach:page.rightSideBar.items">
+                    <li></li>
+                </ul>
+            </li>
+            <li>Sections
+                <ul data-bind="foreach:page.sections.items">
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-6 col-md-5 structure" data-bind="with:page">
+        <div data-bind="template: { name: 'person-template', data: buyer }"></div>
+        <div data-bind="template: { name: 'person-template', data: seller }"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-md-12 result"></div>
+</div>
+<!--Declarations of templates-->
+
+<script src="./js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="./js/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+<script src="./js/bootstrap.min.js" type="text/javascript"></script>
+<script src="./js/knockout-3.0.0rc.js" type="text/javascript"></script>
+<script src="./js/StringInterpolatingBindingProvider.js" type="text/javascript"></script>
+<script src="./js/knockout.mapping.js" type="text/javascript"></script>
+<script src="./js/Namespace.js" type="text/javascript"></script>
+<script src="./js/global.js" type="text/javascript"></script>
+<script src="./js/enums.js" type="text/javascript"></script>
+<script src="./js/page-components.js" type="text/javascript"></script>
+<script src="./js/pages.js" type="text/javascript"></script>
+<script src="./js/page.js" type="text/javascript"></script>
+</body>
+</html>
