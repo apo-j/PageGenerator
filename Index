@@ -39,21 +39,58 @@
             </li>
         </ul>
     </div>
-    <div class="col-xs-6 col-md-5 structure" data-bind="with:page">
-        <div data-bind="template: { name: 'person-template', data: buyer }"></div>
-        <div data-bind="template: { name: 'person-template', data: seller }"></div>
+
+    <!--Declarations of templates-->
+    <script type="text/html" data-bind="attr:{'id':enums.componentIdEnum.BlocItem}">
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">id</span>
+            <input class="col-xs-6 col-md-5" data-bind="value: id"/>
+        </div>
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: on"/>
+        </div>
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">type</span><input class="col-xs-6 col-md-5" data-bind="value: type"/>
+        </div>
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">title</span><input class="col-xs-6 col-md-5" data-bind="value: title"/>
+        </div>
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">attr</span><input class="col-xs-6 col-md-5" data-bind="value: title"/>
+        </div>
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">dataAttr</span>  <button type="button" data-bind="click:$root.createDataAttrItem" class="btn btn-primary btn-xs">+</button>
+            <div data-bind="foreach:Object.keys(dataAttr)">
+                 <input data-bind="value:$data"/>
+                 <input data-bind="value:$parent[$data]"/>
+            </div>
+        </div>
+        <div class="input-group col-xs-12 col-md-12">
+            <span class="col-xs-6 col-md-4">supported language</span>
+            <select data-bind="options: $root.availableLanguages, selectedOptions: supportLangues, optionsCaption: 'Choose...'" size="5" multiple="true"></select>
+        </div>
+        <div class="input-group">
+            <button type="button" class="btn btn-default btn-xs">Cancel</button>
+            <button type="button" data-bind="click:$root.createBlocItem" class="btn btn-primary btn-xs">Create</button>
+        </div>
+        <div class="input-group">
+    </script>
+    <div class="col-xs-6 col-md-5 structure">
+        <div data-bind="template: { name: enums.componentIdEnum.BlocItem, data: blocItem }"></div>
+        <!--<div data-bind="template: { name: 'person-template', data: seller }"></div>-->
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12 col-md-12 result"></div>
 </div>
-<!--Declarations of templates-->
+
 
 <script src="./js/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script src="./js/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
 <script src="./js/knockout-3.0.0rc.js" type="text/javascript"></script>
+<script src="./js/knockoutextensions.js" type="text/javascript"></script>
 <script src="./js/StringInterpolatingBindingProvider.js" type="text/javascript"></script>
 <script src="./js/knockout.mapping.js" type="text/javascript"></script>
 <script src="./js/Namespace.js" type="text/javascript"></script>

@@ -1,18 +1,11 @@
 //definition of basic bricks
 	components.blocItem = function(id, on, type, title, supportLangues, attr, dataAttr, clickCallBack){
 			var self = this;
-			self.id = id;
-			self.type = type;
+			self.id = ko.observable(id);
+			self.type = ko.observable(type);
             self.supportLangues = ko.observableArray(supportLangues || []);
-            var _on = ko.observable(on || false);
-            self.on = ko.computed(function(){
-                if(self.supportLangues.indexOf(translator.currentLanguage()) === -1){
-                    return false;
-                }else{
-                    return _on();
-                }
-            });
-			self.title = translator.translate(title);
+            self.on = ko.observable(on || false);
+			self.title = ko.observable(title);
 			self.attr = attr || {};
 			self.dataAttr = dataAttr || {};
 

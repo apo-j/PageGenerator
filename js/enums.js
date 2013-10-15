@@ -1,1 +1,1 @@
-enums.languageEnum = {    Chinese:'zh',    French:'fr',    English:'en'};enums.blocItemTypeEnum = {	Text: 1,	Image : 2,	Link: 3,	ImageLink : 4};enums.blocTypeEnum = {	List : 1,	Standalone : 2};
+enums.languageEnum = {    Chinese:'zh',    French:'fr',    English:'en'};enums.blocItemTypeEnum = {	Text: 1,	Image : 2,	Link: 3,	ImageLink : 4};enums.blocTypeEnum = {	List : 1,	Standalone : 2};enums.componentIdEnum = {    Page:'page',    SideBar:'sideBar',    Bloc:'bloc',    BlocItem:'blocItem',    Section:'section'};
