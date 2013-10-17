@@ -9,7 +9,7 @@
 			self.attr = attr || {};
 			self.dataAttr = dataAttr || {};
 
-            self.onClick = function(data, event){
+            self.callback = function(data, event){
                 if(!!clickCallBack && typeof clickCallBack === 'function'){
                     clickCallBack(data,event);
                 }
@@ -20,15 +20,15 @@
 			self.id = id;
 			self.type = type;
             self.supportLangues = ko.observableArray(supportLangues || []);
-            var _on = ko.observable(on || false);
-            self.on = ko.computed(function(){
-            if(self.supportLangues.indexOf(translator.currentLanguage()) === -1){
-                return false;
-            }else{
-                return _on();
-            }
-        });
-			self.title = translator.translate(title);
+            self.on = ko.observable(on || false);
+            //self.on = ko.computed(function(){
+            //if(self.supportLangues.indexOf(translator.currentLanguage()) === -1){
+            //    return false;
+            //}else{
+            //    return _on();
+            //}
+            //});
+			self.title = title;
 			self.items = items || [];
         self.attr = attr || {};
         self.dataAttr = dataAttr || {};
@@ -38,6 +38,32 @@
 			self.id = id;
 			self.on = ko.observable(on || false);
 			self.items = items || [];
+            self.onClick = function(data, event){
+                vars.ID = vars.ID + 1;
+
+                var currentObject = {};
+
+                switch(data.value){
+                    case enums.optionsEnums.Properties :
+                        vars.currentPageComponent = enums.componentIdEnum.SideBar;
+                        currentObject = self;
+                        break;
+                    case enums.optionsEnums.Add :
+                        vars.currentPageComponent = enums.componentIdEnum.SideBar;
+                        currentObject = new components.bloc(vars.ID, false, enums.blocTypeEnum.None, 'new bloc');
+                        break;
+                    case enums.optionsEnums.Delete :
+                        vars.currentPageComponent = enums.componentIdEnum.None;
+                        break;
+                    default :
+                        console.log('unknown operation : ' + operation)
+                }
+
+                return {
+                        on :self.on(),
+                        outObject : currentObject
+                };
+            };
 	};
 	components.section = function(id, on, title, body, attr, dataAttr){
 			var self = this;
