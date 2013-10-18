@@ -26,7 +26,7 @@
             </li>
             <li>RightSideBar
                 <div class="btn-group" data-bind="foreach:options.sideBar">
-                    <button type="button" class="btn btn-default btn-xs" data-bind="click:$root.options.sideBarOptionClick">{{name}}</button>
+                    <button type="button" class="btn btn-default btn-xs" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.rightSideBar.onClick)}">{{name}}</button>
                 </div>
                 <ul data-bind="foreach:page.rightSideBar.items">
                     <li></li>
@@ -44,90 +44,35 @@
     <script type="text/html" data-bind="attr:{'id':enums.componentIdEnum.None}">
     </script>
     <script type="text/html" data-bind="attr:{'id':enums.componentIdEnum.SideBar}">
+        side bar
         <div class="input-group col-xs-12 col-md-12">
             <span class="col-xs-6 col-md-4">id</span>
-            <input class="col-xs-6 col-md-5" data-bind="value: id"/>
+            <input class="col-xs-6 col-md-5" data-bind="value: data.id"/>
         </div>
         <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: on"/>
+            <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: data.on"/>
         </div>
     </script>
     <script type="text/html" data-bind="attr:{'id':enums.componentIdEnum.Bloc}">
+        bloc
         <div class="input-group col-xs-12 col-md-12">
             <span class="col-xs-6 col-md-4">id</span>
-            <input class="col-xs-6 col-md-5" data-bind="value: id"/>
+            <input class="col-xs-6 col-md-5" data-bind="value: data.id"/>
         </div>
         <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: on"/>
+            <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: data.on"/>
         </div>
         <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">type</span><input class="col-xs-6 col-md-5" data-bind="value: type"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">title</span><input class="col-xs-6 col-md-5" data-bind="value: title"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">attr</span><input class="col-xs-6 col-md-5" data-bind="value: title"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">dataAttr</span>  <button type="button" data-bind="click:$root.createDataAttrItem" class="btn btn-primary btn-xs">+</button>
-            <div data-bind="foreach:Object.keys(dataAttr)">
-                 <input data-bind="value:$data"/>
-                 <input data-bind="value:$parent[$data]"/>
-            </div>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">supported language</span>
-            <select data-bind="options: $root.availableLanguages, selectedOptions: supportLangues, optionsCaption: 'Choose...'" size="5" multiple="true"></select>
+            <span class="col-xs-6 col-md-4">type</span><input class="col-xs-6 col-md-5" data-bind="value: data.type"/>
         </div>
         <div class="input-group">
             <button type="button" class="btn btn-default btn-xs">Cancel</button>
-            <button type="button" data-bind="click:$root.createBlocItem" class="btn btn-primary btn-xs">Create</button>
+            <button type="button" data-bind="click:function(d, event){$root.options.onClick({value:enums.optionsEnums.Create}, event, $root.page.leftSideBar.onClick)}" class="btn btn-primary btn-xs">Create</button>
         </div>
     </script>
-    <script type="text/html" data-bind="attr:{'id':enums.componentIdEnum.BlocItem}">
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">id</span>
-            <input class="col-xs-6 col-md-5" data-bind="value: id"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: on"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">type</span><input class="col-xs-6 col-md-5" data-bind="value: type"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">title</span><input class="col-xs-6 col-md-5" data-bind="value: title"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">attr</span><input class="col-xs-6 col-md-5" data-bind="value: title"/>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">dataAttr</span>  <button type="button" data-bind="click:$root.createDataAttrItem" class="btn btn-primary btn-xs">+</button>
-            <div data-bind="foreach:Object.keys(dataAttr)">
-                <input data-bind="value:$data"/>
-                <input data-bind="value:$parent[$data]"/>
-            </div>
-        </div>
-        <div class="input-group col-xs-12 col-md-12">
-            <span class="col-xs-6 col-md-4">supported language</span>
-            <select data-bind="options: $root.availableLanguages, selectedOptions: supportLangues, optionsCaption: 'Choose...'" size="5" multiple="true"></select>
-        </div>
-        <div class="input-group">
-            <button type="button" class="btn btn-default btn-xs">Cancel</button>
-            <button type="button" data-bind="click:$root.createBlocItem" class="btn btn-primary btn-xs">Create</button>
-        </div>
-    </script>
+
     <div class="col-xs-6 col-md-5 content">
-        <!-- ko if: currentPageComponent() == enums.componentIdEnum.None -->
-        <div data-bind="template: { name: enums.componentIdEnum.None, data: pageComponentData }"></div>
-        <!-- /ko -->
-        <!-- ko if: currentPageComponent() == enums.componentIdEnum.SideBar -->
-        <div data-bind="template: { name: enums.componentIdEnum.SideBar, data: pageComponentData }"></div>
-        <!-- /ko -->
-        <!-- ko if: currentPageComponent() == enums.componentIdEnum.Bloc -->
-        <div data-bind="template: { name: enums.componentIdEnum.Bloc, data: pageComponentData }"></div>
-        <!-- /ko -->
+        <div data-bind="template: { name: function(val){return val.template;}, data: templateParams }"></div>
     </div>
 </div>
 
