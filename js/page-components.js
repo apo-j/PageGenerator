@@ -3,6 +3,8 @@
 			var self = this;
 			self.id = ko.observable(id);
 			self.type = ko.observable(type);
+            self.src = ko.observable('');
+            self.href = ko.observable('');
             self.supportLangues = ko.observableArray(supportLangues || []);
             self.on = ko.observable(on || true);
 			self.title = ko.observable(title);
@@ -38,7 +40,9 @@
 
         (function(){
             for(var p in self.attr()){
-                self.attr.attrArray.push({name:ko.observable(p), value:ko.observable(attr()[p])});
+                if(self.attr.hasOwnProperty(p)) {
+                    self.attr.attrArray.push({name:ko.observable(p), value:ko.observable(attr()[p])});
+                };
             }
         }());
 
@@ -51,9 +55,8 @@
         }
 
         self.attr.setAttr = function(attrs){
-            self.attr({});
             ko.utils.arrayForEach(attrs(), function(at){
-                self.attr()[at.name()] = at.value();
+                self.attr()[at.name()] = ko.observable(at.value());
             });
         }
 
@@ -71,11 +74,6 @@
                     self.on.creation(false);
                     currentPageComponent = enums.componentEnum.Bloc;
                     currentObject = self;
-                    break;
-                case enums.optionsEnums.Add :
-                    currentPageComponent = enums.componentEnum.Bloc;
-                    currentObject = new components.bloc(utilities.incrementor(), false, false, enums.blocTypeEnum.None, 'new bloc');
-                    self.currentChild  =  currentObject;
                     break;
                 case enums.optionsEnums.Delete :
                     currentPageComponent = enums.componentEnum.None;
@@ -106,21 +104,21 @@
 	};
 	components.sideBar = function(id, on, active, items, type, attr, dataAttr){
 			var self = this;
-            self.type = ko.observable(type);
 			self.id = ko.observable(id);
 			self.on = ko.observable(on || true);
             self.on.active = ko.observable(active || false);
             self.on.creation = ko.observable(true);
+            self.on.type = ko.observable(type);
 			self.items = ko.observableArray(items || []);
             self.on.currentChild = null;
             self.onClick = function(data, event){
-                var currentPageComponent =  self.type();
+                var currentPageComponent =  self.on.type();
                 var currentObject = {};
 
                 switch(data.value){
                     case enums.optionsEnums.Properties :
                         self.on.creation(false);
-                        currentPageComponent = self.type();
+                        currentPageComponent = self.on.type();
                         currentObject = self;
                         break;
                     case enums.optionsEnums.Add :

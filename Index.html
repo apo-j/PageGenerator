@@ -39,7 +39,7 @@
     </div>
     <div class="input-group col-xs-12 col-md-12">
         <span class="col-xs-6 col-md-4">type</span>
-        <select class="col-xs-6 col-md-3" data-bind="options: $root.options.blocTypes, optionsText: 'name', value: data.type, optionsCaption: 'Choose...'"></select>
+        <select class="col-xs-6 col-md-3" data-bind="options: $root.options.blocTypes, optionsText: 'name', optionsValue:'value', value: data.type, optionsCaption: 'Choose...'"></select>
     </div>
     <div class="input-group col-xs-12 col-md-12">
         <span class="col-xs-6 col-md-4">title</span><input class="col-xs-6 col-md-5" data-bind="value: data.title"/>
@@ -76,6 +76,7 @@
                 <th >type</th>
                 <th >support languages</th>
                 <th >title</th>
+                <th >(Image) Link</th>
                 <th ></th>
             </tr>
             </thead>
@@ -83,9 +84,23 @@
             <tr>
                 <td><input data-bind="value:id"/></td>
                 <td><input type="checkbox" data-bind="checked:on"/></td>
-                <td><select data-bind="options: $root.options.blocItemTypes, optionsText: 'name', value: type, optionsCaption: 'Choose...'"></select></td>
+                <td><select data-bind="options: $root.options.blocItemTypes, optionsText: 'name', optionsValue:'value' , value: type, optionsCaption: 'Choose...'"></select></td>
                 <td><select data-bind="options: $root.availableLanguages, selectedOptions: supportLangues, optionsCaption: 'Choose...'" size="5" multiple="true"></select></td>
                 <td><input data-bind="value:title"/></td>
+                <td>
+                    <!-- ko if:  type() === enums.blocItemTypeEnum.Image || type() === enums.blocItemTypeEnum.ImageLink-->
+                    <div class="input-group col-xs-12 col-md-12">
+                        <span>src</span>
+                        <input data-bind="value:src"/>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if:  type() === enums.blocItemTypeEnum.Link || type() === enums.blocItemTypeEnum.ImageLink-->
+                    <div class="input-group col-xs-12 col-md-12">
+                        <span>href</span>
+                        <input data-bind="value:href"/>
+                    </div>
+                    <!-- /ko -->
+                </td>
                 <td><span data-bind="click:$parent.data.items.delete" class="glyphicon glyphicon-remove"></span></td>
             </tr>
             </tbody>
@@ -114,7 +129,7 @@
         Page :
         <ul>
             <li data-bind="with:page.leftSideBar">
-                <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled' : '')},click:$root.onDisablableComponentClick">LeftSideBar</span>
+                <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled pointer' : '')},click:$root.onDisablableComponentClick">LeftSideBar</span>
                 <!-- ko if: on.active() -->
                 <div class="btn-group" data-bind="foreach:$root.options.sideBar">
                     <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}, attr{class: (!$parent.on.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
@@ -122,7 +137,7 @@
                 <!-- /ko -->
                 <ul data-bind="foreach:items">
                     <li>
-                        <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled' : '')},text:title,click:$root.onDisablableComponentClick"></span>
+                        <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled pointer' : '')},text:title,click:$root.onDisablableComponentClick"></span>
                         <!-- ko if: on.active() -->
                         <div class="btn-group" data-bind="foreach:$root.options.bloc">
                             <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}, attr{class: (!$parent.on.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
@@ -132,7 +147,7 @@
                 </ul>
             </li>
             <li data-bind="with:page.rightSideBar">
-                <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled' : '')},click:$root.onDisablableComponentClick">RightSideBar</span>
+                <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled pointer' : '')},click:$root.onDisablableComponentClick">RightSideBar</span>
                 <!-- ko if: on.active() -->
                 <div class="btn-group" data-bind="foreach:$root.options.sideBar">
                     <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.rightSideBar.onClick)}, attr{class: (!$parent.on.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
@@ -140,7 +155,7 @@
                 <!-- /ko -->
                 <ul data-bind="foreach:items">
                     <li>
-                        <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled' : '')},text:title,click:$root.onDisablableComponentClick"></span>
+                        <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled pointer' : '')},text:title,click:$root.onDisablableComponentClick"></span>
                         <!-- ko if: on.active() -->
                         <div class="btn-group" data-bind="foreach:$root.options.bloc">
                             <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.rightSideBar.onClick)}, attr{class: (!$parent.on.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
