@@ -57,7 +57,7 @@
         self.attr.setAttr = function(attrs){
             self.attr({});		
             ko.utils.arrayForEach(attrs(), function(at){
-                self.attr()[at.name()] = ko.observable(at.value());
+                self.attr()[at.name()] = at.value();
             });
         }
 

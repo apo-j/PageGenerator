@@ -36,10 +36,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="page.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="page.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/page.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="49" selection-start="3184" selection-end="3184" vertical-scroll-proportion="0.4040067">
+            <state line="90" column="63" selection-start="3374" selection-end="3374" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -75,7 +75,7 @@
       <file leaf-file-name="Index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="167" selection-start="6021" selection-end="6021" vertical-scroll-proportion="-10.423077">
+            <state line="113" column="167" selection-start="6021" selection-end="6021" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -99,10 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="page-components.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="page-components.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/page-components.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="44" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
+            <state line="29" column="54" selection-start="1326" selection-end="1326" vertical-scroll-proportion="0.34812286">
               <folding />
             </state>
           </provider>
@@ -128,8 +128,8 @@
         <option value="$PROJECT_DIR$/js/utilities.js" />
         <option value="$PROJECT_DIR$/css/site.css" />
         <option value="$PROJECT_DIR$/Index.html" />
-        <option value="$PROJECT_DIR$/js/page-components.js" />
         <option value="$PROJECT_DIR$/js/page.js" />
+        <option value="$PROJECT_DIR$/js/page-components.js" />
       </list>
     </option>
   </component>
@@ -401,9 +401,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/enums.js">
+    <entry file="file://$PROJECT_DIR$/Index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="150" selection-end="159" vertical-scroll-proportion="0.0">
+        <state line="113" column="167" selection-start="6021" selection-end="6021" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="63" selection-start="3374" selection-end="3374" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -415,23 +422,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Index.html">
+    <entry file="file://$PROJECT_DIR$/js/enums.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="167" selection-start="6021" selection-end="6021" vertical-scroll-proportion="-10.423077">
+        <state line="10" column="13" selection-start="150" selection-end="159" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/page-components.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="44" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="49" selection-start="3184" selection-end="3184" vertical-scroll-proportion="0.4040067">
+        <state line="29" column="54" selection-start="1326" selection-end="1326" vertical-scroll-proportion="0.34812286">
           <folding />
         </state>
       </provider>
