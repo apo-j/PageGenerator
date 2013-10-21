@@ -72,7 +72,7 @@
     </div>
     <div class="input-group">
         <button type="button" class="btn btn-default btn-xs">Cancel</button>
-        <button type="button" data-bind="click:function(d, event){$root.options.onClick({value:enums.optionsEnums.Create}, event, $root.page.leftSideBar.onClick)}" class="btn btn-primary btn-xs">Create</button>
+        <button type="button" data-bind="click:function(d, event){$root.options.onClick({value:enums.optionsEnums.Create}, event)}" class="btn btn-primary btn-xs">Create</button>
     </div>
 </script>
 
@@ -84,28 +84,40 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-md-3 components">
+    <div class="col-xs-12 col-md-4 components">
         Page :
         <ul>
-            <li data-bind="with:page.leftSideBar">LeftSideBar
+            <li data-bind="with:page.leftSideBar">
+                <span data-bind="attr:{'class': ( (!active()) ? 'disabled' : '')},click:$root.onDisablableComponentClick">LeftSideBar</span>
                 <div class="btn-group" data-bind="foreach:$root.options.sideBar">
-                    <button type="button" class="btn btn-default btn-xs" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}">{{name}}</button>
+                    <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}, attr{class: (!$parent.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
                 </div>
                 <ul data-bind="foreach:items">
-                    <li><span data-bind="text:title"></span></li>
+                    <li>
+                        <span data-bind="attr:{'class': ( (!active()) ? 'disabled' : '')},text:title,click:$root.onDisablableComponentClick"></span>
+                        <div class="btn-group" data-bind="foreach:$root.options.bloc">
+                            <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}, attr{class: (!$parent.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
+                        </div>
+                    </li>
                 </ul>
             </li>
-            <li>RightSideBar
-                <div class="btn-group" data-bind="foreach:options.sideBar">
-                    <button type="button" class="btn btn-default btn-xs" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.rightSideBar.onClick)}">{{name}}</button>
+            <li data-bind="with:page.rightSideBar">
+                <span data-bind="attr:{'class': ( (!active()) ? 'disabled' : '')},click:$root.onDisablableComponentClick">RightSideBar</span>
+                <div class="btn-group" data-bind="foreach:$root.options.sideBar">
+                    <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}, attr{class: (!$parent.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
                 </div>
-                <ul data-bind="foreach:page.rightSideBar.items">
-                    <li></li>
+                <ul data-bind="foreach:items">
+                    <li>
+                        <span data-bind="attr:{'class': ( (!active()) ? 'disabled' : '')},text:title"></span>
+                        <div class="btn-group" data-bind="foreach:$root.options.bloc">
+                            <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.leftSideBar.onClick)}, attr{class: (!$parent.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
+                        </div>
+                    </li>
                 </ul>
             </li>
         </ul>
     </div>
-    <div class="col-xs-6 col-md-9 content">
+    <div class="col-xs-15 col-md-8 content">
         <div data-bind="template: { name: function(val){return val.template;}, data: templateParams }"></div>
     </div>
 </div>

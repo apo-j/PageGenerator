@@ -14,3 +14,6 @@ div.result{
     height:500px;
     border:1px solid #EEEEEE;
 }
+span.disabled{
+    opacity: 0.65;
+}

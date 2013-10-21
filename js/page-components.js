@@ -15,12 +15,13 @@
                 }
             };
 	};
-	components.bloc = function(id, on, type, title, items,supportLangues, attr, dataAttr){
+	components.bloc = function(id, on, active, type, title, items,supportLangues, attr, dataAttr){
 			var self = this;
 			self.id = ko.observable(id);
 			self.type = ko.observable(type || enums.blocTypeEnum.None);
             self.supportLangues = ko.observableArray(supportLangues || []);
             self.on = ko.observable(on || false);
+            self.active = ko.observable(active || false);
             //self.on = ko.computed(function(){
             //if(self.supportLangues.indexOf(translator.currentLanguage()) === -1){
             //    return false;
@@ -35,12 +36,49 @@
         self.addItem = function(){
             self.items.push(new components.blocItem(utilities.incrementor(), false, enums.blocItemTypeEnum.None, 'new item'));
         }
+        self.onClick = function(data, event){
+            var currentPageComponent =  self.type();
+            var currentObject = {};
+
+            switch(data.value){
+                case enums.optionsEnums.Properties :
+                    currentPageComponent = enums.componentEnum.Bloc;
+                    currentObject = self;
+                    break;
+                case enums.optionsEnums.Add :
+                    currentPageComponent = enums.componentEnum.Bloc;
+                    currentObject = new components.bloc(utilities.incrementor(), false, false, enums.blocTypeEnum.None, 'new bloc');
+                    self.currentChild  =  currentObject;
+                    break;
+                case enums.optionsEnums.Delete :
+                    currentPageComponent = enums.componentEnum.None;
+                    break;
+                case enums.optionsEnums.Create :
+                    currentPageComponent = enums.componentEnum.None;
+                    currentObject = self.currentChild;
+                    self.items.push(self.currentChild);
+                    break;
+                case enums.optionsEnums.Cancel :
+                    currentPageComponent = enums.componentEnum.None;
+                    self.currentChild = null;
+                    break;
+                default :
+                    console.log('unknown operation : ' + operation)
+            }
+
+            return {
+                on :self.on(),
+                currentPageComponent: currentPageComponent,
+                outObject : currentObject
+            };
+        }
 	};
-	components.sideBar = function(id, on, items, type, attr, dataAttr){
+	components.sideBar = function(id, on, active, items, type, attr, dataAttr){
 			var self = this;
             self.type = ko.observable(type);
 			self.id = ko.observable(id);
 			self.on = ko.observable(on || false);
+            self.active = ko.observable(active || false);
 			self.items = ko.observableArray(items || []);
             self.currentChild = null;
             self.onClick = function(data, event){
@@ -49,11 +87,12 @@
 
                 switch(data.value){
                     case enums.optionsEnums.Properties :
+                        currentPageComponent = self.type();
                         currentObject = self;
                         break;
                     case enums.optionsEnums.Add :
                         currentPageComponent = enums.componentEnum.Bloc;
-                        currentObject = new components.bloc(utilities.incrementor(), false, enums.blocTypeEnum.None, 'new bloc');
+                        currentObject = new components.bloc(utilities.incrementor(), false, false, enums.blocTypeEnum.None, 'new bloc');
                         self.currentChild  =  currentObject;
                         break;
                     case enums.optionsEnums.Delete :
@@ -61,6 +100,7 @@
                         break;
                     case enums.optionsEnums.Create :
                         currentPageComponent = enums.componentEnum.None;
+                        currentObject = self.currentChild;
                         self.items.push(self.currentChild);
                         break;
                     case enums.optionsEnums.Cancel :
