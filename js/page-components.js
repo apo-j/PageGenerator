@@ -17,9 +17,8 @@
 	};
 	components.bloc = function(id, on, type, title, items,supportLangues, attr, dataAttr){
 			var self = this;
-            self.tt = 'bloc';
 			self.id = ko.observable(id);
-			self.type = ko.observable(type);
+			self.type = ko.observable(type || enums.blocTypeEnum.None);
             self.supportLangues = ko.observableArray(supportLangues || []);
             self.on = ko.observable(on || false);
             //self.on = ko.computed(function(){
@@ -33,17 +32,19 @@
 			self.items = ko.observableArray(items || []);
             self.attr = attr || {};
             self.dataAttr = dataAttr || {};
+        self.addItem = function(){
+            self.items.push(new components.blocItem(utilities.incrementor(), false, enums.blocItemTypeEnum.None, 'new item'));
+        }
 	};
-	components.sideBar = function(id, on, items, attr, dataAttr){
+	components.sideBar = function(id, on, items, type, attr, dataAttr){
 			var self = this;
-            self.tt = 'sidebar';
+            self.type = ko.observable(type);
 			self.id = ko.observable(id);
 			self.on = ko.observable(on || false);
 			self.items = ko.observableArray(items || []);
             self.currentChild = null;
             self.onClick = function(data, event){
-                vars.ID = vars.ID + 1;
-                var currentPageComponent =  enums.componentIdEnum.SideBar;
+                var currentPageComponent =  self.type();
                 var currentObject = {};
 
                 switch(data.value){
@@ -51,19 +52,19 @@
                         currentObject = self;
                         break;
                     case enums.optionsEnums.Add :
-                        currentPageComponent = enums.componentIdEnum.Bloc;
-                        currentObject = new components.bloc(utilities.getID(), false, enums.blocTypeEnum.None, 'new bloc');
+                        currentPageComponent = enums.componentEnum.Bloc;
+                        currentObject = new components.bloc(utilities.incrementor(), false, enums.blocTypeEnum.None, 'new bloc');
                         self.currentChild  =  currentObject;
                         break;
                     case enums.optionsEnums.Delete :
-                        currentPageComponent = enums.componentIdEnum.None;
+                        currentPageComponent = enums.componentEnum.None;
                         break;
                     case enums.optionsEnums.Create :
-                        currentPageComponent = enums.componentIdEnum.None;
+                        currentPageComponent = enums.componentEnum.None;
                         self.items.push(self.currentChild);
                         break;
                     case enums.optionsEnums.Cancel :
-                        currentPageComponent = enums.componentIdEnum.None;
+                        currentPageComponent = enums.componentEnum.None;
                         self.currentChild = null;
                         break;
                     default :

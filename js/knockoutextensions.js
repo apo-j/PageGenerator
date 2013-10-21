@@ -1,15 +1,3 @@
-ko.bindingHandlers.attr = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-		var value = ko.utils.unwrapObservable(valueAccessor());
-		
-		for(var i in value){
-			if(value.hasOwnProperty(i) && !!value[i]){
-				$(element).attr(i, value[i]);
-			}
-		}
-    }
-};
-
 ko.bindingHandlers.dataAttr = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
 		var value = ko.utils.unwrapObservable(valueAccessor());
@@ -38,5 +26,13 @@ ko.bindingHandlers.Example = {
         }else{
 			$(element).css('outline', '0');
 		}
+    }
+};
+ko.bindingHandlers.action = {
+    init: function(element, valueAccessor, allBindingsAccessor, context) {
+        var options = valueAccessor();
+        if(typeof options === 'function'){
+            options.apply(context, [context]);
+        }
     }
 };
