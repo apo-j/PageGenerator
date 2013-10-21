@@ -7,6 +7,23 @@ var utilities = (function(utilities){
         return self.id;
     };
 
+    utilities.getBlocParent = function(page, bloc){
+       var b =  ko.utils.arrayFirst(page.leftSideBar.items(), function(item){
+             return item.id() == bloc.id();
+        });
+
+        if(!b){
+            b = ko.utils.arrayFirst(page.rightSideBar.items(), function(item){
+                return item.id() == bloc.id();
+            });
+            if(!!b){
+                return page.rightSideBar;
+            }
+        }else{
+            return page.leftSideBar;
+        }
+    };
+
     //when final target is a observableArray, the id represent the element's id in the array
     utilities.apply = function( context, objstr, callback, params, id, seperator){
         var objs = objstr.split(seperator || '|');
