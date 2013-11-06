@@ -175,6 +175,7 @@
             <li data-bind="with:page.body">
                 <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled pointer' : '')},click:$root.onDisablableComponentClick">Body</span>
                 sf<!-- ko if: on.active() -->
+                <!-- ko if: on.active() -->rt
                 <div class="btn-group" data-bind="foreach:$root.options.body">
                     <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.rightSideBar.onClick)}, attr{class: (!$parent.on.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
                 </div>
