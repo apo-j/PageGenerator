@@ -116,7 +116,15 @@
         <!-- /ko -->
     </div>
 </script>
-
+<script type="text/html" data-bind="attr:{'id':enums.componentEnum.Body}">
+    <div class="input-group col-xs-12 col-md-12">
+        <span class="col-xs-6 col-md-4">id</span>
+        <input class="col-xs-6 col-md-5" data-bind="value: data.id"/>
+    </div>
+    <div class="input-group col-xs-12 col-md-12">
+        <span class="col-xs-6 col-md-4">on</span><input type="checkbox" class="col-xs-6 col-md-1" data-bind="checked: data.on"/>
+    </div>
+</script>
 
 
 
@@ -164,6 +172,14 @@
                     </li>
                 </ul>
             </li>
+            <li data-bind="with:page.body">
+                <span data-bind="attr:{'class': ( (!on.active()) ? 'disabled pointer' : '')},click:$root.onDisablableComponentClick">Body</span>
+                <!-- ko if: on.active() -->
+                <div class="btn-group" data-bind="foreach:$root.options.body">
+                    <button type="button" data-bind="click:function(data, event){$root.options.onClick(data, event, $root.page.rightSideBar.onClick)}, attr{class: (!$parent.on.active() ? 'disabled' : '') + ' btn btn-default btn-xs'}">{{name}}</button>
+                </div>
+                <!-- /ko -->
+            </li>
         </ul>
     </div>
     <div class="col-xs-15 col-md-8 content">
@@ -182,7 +198,7 @@
 <script src="./js/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script src="./js/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
 <script src="./js/bootstrap.min.js" type="text/javascript"></script>
-<script src="./js/knockout-3.0.0rc.js" type="text/javascript"></script>
+<script src="./js/knockout-3.0.0.js" type="text/javascript"></script>
 <script src="./js/knockoutextensions.js" type="text/javascript"></script>
 <script src="./js/StringInterpolatingBindingProvider.js" type="text/javascript"></script>
 <script src="./js/knockout.mapping.js" type="text/javascript"></script>

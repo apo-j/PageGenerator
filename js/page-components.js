@@ -104,52 +104,102 @@
         }
 	};
 	components.sideBar = function(id, on, active, items, type, attr, dataAttr){
-			var self = this;
-			self.id = ko.observable(id);
-			self.on = ko.observable(on || true);
-            self.on.active = ko.observable(active || false);
-            self.on.creation = ko.observable(true);
-            self.on.type = ko.observable(type);
-			self.items = ko.observableArray(items || []);
-            self.on.currentChild = null;
-            self.onClick = function(data, event){
-                var currentPageComponent =  self.on.type();
-                var currentObject = {};
+        var self = this;
+        self.id = ko.observable(id);
+        self.on = ko.observable(on || true);
+        self.on.active = ko.observable(active || false);
+        self.on.creation = ko.observable(true);
+        self.on.type = ko.observable(type);
+        self.items = ko.observableArray(items || []);
+        self.on.currentChild = null;
+        self.onClick = function(data, event){
+            var currentPageComponent =  self.on.type();
+            var currentObject = {};
 
-                switch(data.value){
-                    case enums.optionsEnums.Properties :
-                        self.on.creation(false);
-                        currentPageComponent = self.on.type();
-                        currentObject = self;
-                        break;
-                    case enums.optionsEnums.Add :
-                        currentPageComponent = enums.componentEnum.Bloc;
-                        currentObject = new components.bloc(utilities.incrementor(), false, false, enums.blocTypeEnum.None, 'new bloc');
-                        self.on.currentChild  =  currentObject;
-                        break;
-                    case enums.optionsEnums.Delete :
-                        currentPageComponent = enums.componentEnum.None;
-                        break;
-                    case enums.optionsEnums.Create :
-                        currentPageComponent = enums.componentEnum.None;
-                        currentObject = self.on.currentChild;
-                        self.items.push(self.on.currentChild);
-                        break;
-                    case enums.optionsEnums.Cancel :
-                        currentPageComponent = enums.componentEnum.None;
-                        self.on.currentChild = null;
-                        break;
-                    default :
-                        console.log('unknown operation : ' + operation)
-                }
+            switch(data.value){
+                case enums.optionsEnums.Properties :
+                    self.on.creation(false);
+                    currentPageComponent = self.on.type();
+                    currentObject = self;
+                    break;
+                case enums.optionsEnums.Add :
+                    currentPageComponent = enums.componentEnum.Bloc;
+                    currentObject = new components.bloc(utilities.incrementor(), false, false, enums.blocTypeEnum.None, 'new bloc');
+                    self.on.currentChild  =  currentObject;
+                    break;
+                case enums.optionsEnums.Delete :
+                    currentPageComponent = enums.componentEnum.None;
+                    break;
+                case enums.optionsEnums.Create :
+                    currentPageComponent = enums.componentEnum.None;
+                    currentObject = self.on.currentChild;
+                    self.items.push(self.on.currentChild);
+                    break;
+                case enums.optionsEnums.Cancel :
+                    currentPageComponent = enums.componentEnum.None;
+                    self.on.currentChild = null;
+                    break;
+                default :
+                    console.log('unknown operation : ' + operation)
+            }
 
-                return {
-                        on :self.on(),
-                        currentPageComponent: currentPageComponent,
-                        outObject : currentObject
-                };
+            return {
+                on :self.on(),
+                currentPageComponent: currentPageComponent,
+                outObject : currentObject
             };
-	};
+        };
+    };
+
+
+components.body = function(id, on, active, items, type, attr, dataAttr){
+    var self = this;
+    self.id = ko.observable(id);
+    self.on = ko.observable(on || true);
+    self.on.active = ko.observable(active || false);
+    self.on.creation = ko.observable(true);
+    self.on.type = ko.observable(type);
+    self.items = ko.observableArray(items || []);
+    self.on.currentChild = null;
+    self.onClick = function(data, event){
+        var currentPageComponent =  self.on.type();
+        var currentObject = {};
+
+        switch(data.value){
+            case enums.optionsEnums.Properties :
+                self.on.creation(false);
+                currentPageComponent = self.on.type();
+                currentObject = self;
+                break;
+            case enums.optionsEnums.Add :
+                currentPageComponent = enums.componentEnum.Bloc;
+                currentObject = new components.bloc(utilities.incrementor(), false, false, enums.blocTypeEnum.None, 'new bloc');
+                self.on.currentChild  =  currentObject;
+                break;
+            case enums.optionsEnums.Delete :
+                currentPageComponent = enums.componentEnum.None;
+                break;
+            case enums.optionsEnums.Create :
+                currentPageComponent = enums.componentEnum.None;
+                currentObject = self.on.currentChild;
+                self.items.push(self.on.currentChild);
+                break;
+            case enums.optionsEnums.Cancel :
+                currentPageComponent = enums.componentEnum.None;
+                self.on.currentChild = null;
+                break;
+            default :
+                console.log('unknown operation : ' + operation)
+        }
+
+        return {
+            on :self.on(),
+            currentPageComponent: currentPageComponent,
+            outObject : currentObject
+        };
+    };
+};
+
 	components.section = function(id, on, title, body, attr, dataAttr){
 			var self = this;
 			self.id = id;
